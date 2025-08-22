@@ -10,21 +10,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const $ = cheerio.load(await response.text());
     const title = $('head > title').first().text().trim() || 'No Title';
     return {
-      title,
+      title: title,
       openGraph: {
-        title,
         url,
-        type: 'website',
         images: [
           {
             url: '/og.png',
           },
         ],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: title,
-        images: ['/og.png'],
       }
     }
   } else {
